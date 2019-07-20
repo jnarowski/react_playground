@@ -28,10 +28,14 @@ export class Widgets extends React.Component {
         <h1>Widgets</h1>
         <p>Count: {this.props.count}</p>
         <p>
-          <button onClick={this.props.incrementWidget}>Increment</button>
+          <button onClick={() => this.props.incrementWidget()}>
+            Increment
+          </button>
         </p>
         <p>
-          <button onClick={this.props.decrementWidget}>Decrement</button>
+          <button onClick={() => this.props.decrementWidget()}>
+            Decrement
+          </button>
         </p>
       </div>
     )

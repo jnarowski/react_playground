@@ -2,10 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { incrementWidget, decrementWidget } from 'store/reducers/widgets'
+import {
+  incrementWidget,
+  decrementWidget,
+} from 'store/reducers/widgets-starter-kit'
 
-const mapStateToProps = ({ widgets }) => ({
-  count: widgets.count,
+const mapStateToProps = ({ widgetsStarterKit }) => ({
+  count: widgetsStarterKit.count,
 })
 
 const mapDispatchToProps = (dispatch) =>
@@ -28,10 +31,14 @@ export class Widgets extends React.Component {
         <h1>Widgets (Starter Kit)</h1>
         <p>Count: {this.props.count}</p>
         <p>
-          <button onClick={this.props.incrementWidget}>Increment</button>
+          <button onClick={() => this.props.incrementWidget()}>
+            Increment
+          </button>
         </p>
         <p>
-          <button onClick={this.props.decrementWidget}>Decrement</button>
+          <button onClick={() => this.props.decrementWidget()}>
+            Decrement
+          </button>
         </p>
       </div>
     )

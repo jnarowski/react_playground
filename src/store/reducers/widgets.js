@@ -55,11 +55,12 @@ export default function reducer(state = initialState, action = {}) {
 // Action Creators
 // ---------------------------------------------------
 
-export function incrementWidget(widget) {
+export function incrementWidget(widget = {}) {
+  // console.log('widget....', widget);
   return { type: INCREASE, widget }
 }
 
-export function decrementWidget(widget) {
+export function decrementWidget(widget = {}) {
   return { type: DECREASE, widget }
 }
 

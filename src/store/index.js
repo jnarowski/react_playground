@@ -1,38 +1,29 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
-import { combineReducers } from 'redux'
-import thunk from 'redux-thunk'
-import { createBrowserHistory } from 'history'
-import reducers from "./reducers/index"
+import { configureStore, getDefaultMiddleware } from 'redux-starter-kit'
 
-const rootReducer = combineReducers(reducers)
-const history = createBrowserHistory()
+// We'll use redux-logger just as an example of adding another middleware
+import logger from 'redux-logger'
 
-const initialState = {}
-const enhancers = []
-const middleware = [thunk, routerMiddleware(history)]
+import reducer from "./reducers/index"
 
-if (process.env.NODE_ENV === 'development') {
-    const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__
+const middleware = [...getDefaultMiddleware(), logger]
 
-    if (typeof devToolsExtension === 'function') {
-        enhancers.push(devToolsExtension())
-    }
+const initialState = {
 }
 
-const composedEnhancers = compose(
-    applyMiddleware(...middleware),
-    ...enhancers
-)
-
-const store = createStore(
-    connectRouter(history)(rootReducer),
-    initialState,
-    composedEnhancers
-)
+// The store has been created with these options:
+// - The slice reducers were automatically passed to combineReducers()
+// - redux-thunk and redux-logger were added as middleware
+// - The Redux DevTools Extension is disabled for production
+// - The middleware, batch, and devtools enhancers were automatically composed together
+const store = configureStore({
+  reducer,
+  middleware,
+  devTools: process.env.NODE_ENV !== 'production',
+  initialState
+})
 
 const dispatch = store.dispatch
 
-export { dispatch, history }
+export { dispatch }
 
 export default store
