@@ -6,30 +6,31 @@ import {
   increment,
   incrementAsync,
   decrement,
-  decrementAsync
+  decrementAsync,
 } from 'store/reducers/counter'
 // alternative way of doing actions
-import { doIncrement } from "store/reducers/counter"
+import { doIncrement } from 'store/reducers/counter'
 
 const mapStateToProps = ({ counter }) => ({
   count: counter.count,
   isIncrementing: counter.isIncrementing,
-  isDecrementing: counter.isDecrementing
+  isDecrementing: counter.isDecrementing,
 })
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
       increment,
       incrementAsync,
       decrement,
       decrementAsync,
-      changePage: () => push('/about-us')
+      changePage: () => push('/about-us'),
     },
     dispatch
   )
 
 class Home extends React.Component {
-  increaseIncrement() {
+  handleIncrement() {
     return doIncrement()
   }
 
@@ -37,22 +38,26 @@ class Home extends React.Component {
     return (
       <div>
         <h1>Home</h1>
-        <p> Count: { this.props.count } </p>
+        <p>Count: {this.props.count}</p>
         <p>
           <button onClick={this.props.increment}>Increment</button>
-          <button onClick={this.increaseIncrement}>Increment Locally</button>
-          <button onClick={this.props.incrementAsync} disabled={this.props.isIncrementing}>
+          <button onClick={this.handleIncrement}>Increment Locally</button>
+          <button
+            onClick={this.props.incrementAsync}
+            disabled={this.props.isIncrementing}
+          >
             Increment Async
           </button>
         </p>
-
         <p>
           <button onClick={this.props.decrement}>Decrement</button>
-          <button onClick={this.props.decrementAsync} disabled={this.props.isDecrementing}>
+          <button
+            onClick={this.props.decrementAsync}
+            disabled={this.props.isDecrementing}
+          >
             Decrement Async
           </button>
         </p>
-
         <p>
           <button onClick={() => this.props.changePage()}>
             Go to about page via redux
