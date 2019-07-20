@@ -1,3 +1,5 @@
+import { dispatch } from "../index"
+
 export const INCREMENT_REQUESTED = 'counter/INCREMENT_REQUESTED'
 export const INCREMENT = 'counter/INCREMENT'
 export const DECREMENT_REQUESTED = 'counter/DECREMENT_REQUESTED'
@@ -7,6 +9,15 @@ const initialState = {
   count: 0,
   isIncrementing: false,
   isDecrementing: false
+}
+
+export const doIncrement = () => {
+  dispatch({
+    type: INCREMENT_REQUESTED
+  })
+  dispatch({
+    type: INCREMENT
+  })
 }
 
 export default (state = initialState, action) => {

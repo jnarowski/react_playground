@@ -7,7 +7,9 @@ import {
   incrementAsync,
   decrement,
   decrementAsync
-} from '../../store/reducers/counter'
+} from 'store/reducers/counter'
+// alternative way of doing actions
+import { doIncrement } from "store/reducers/counter"
 
 const mapStateToProps = ({ counter }) => ({
   count: counter.count,
@@ -27,6 +29,10 @@ const mapDispatchToProps = dispatch =>
   )
 
 class Home extends React.Component {
+  increaseIncrement() {
+    return doIncrement()
+  }
+
   render() {
     return (
       <div>
@@ -34,6 +40,7 @@ class Home extends React.Component {
         <p> Count: { this.props.count } </p>
         <p>
           <button onClick={this.props.increment}>Increment</button>
+          <button onClick={this.increaseIncrement}>Increment Locally</button>
           <button onClick={this.props.incrementAsync} disabled={this.props.isIncrementing}>
             Increment Async
           </button>
