@@ -7,34 +7,7 @@ import {
   incrementAsync,
   decrement,
   decrementAsync
-} from '../../modules/counter'
-
-const Home = props => (
-  <div>
-    <h1>Home</h1>
-    <p>Count: {props.count}</p>
-
-    <p>
-      <button onClick={props.increment}>Increment</button>
-      <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
-        Increment Async
-      </button>
-    </p>
-
-    <p>
-      <button onClick={props.decrement}>Decrement</button>
-      <button onClick={props.decrementAsync} disabled={props.isDecrementing}>
-        Decrement Async
-      </button>
-    </p>
-
-    <p>
-      <button onClick={() => props.changePage()}>
-        Go to about page via redux
-      </button>
-    </p>
-  </div>
-)
+} from '../../store/reducers/counter'
 
 const mapStateToProps = ({ counter }) => ({
   count: counter.count,
@@ -43,8 +16,7 @@ const mapStateToProps = ({ counter }) => ({
 })
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
+  bindActionCreators({
       increment,
       incrementAsync,
       decrement,
@@ -53,6 +25,36 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   )
+
+class Home extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Home</h1>
+        <p> Count: { this.props.count } </p>
+        <p>
+          <button onClick={this.props.increment}>Increment</button>
+          <button onClick={this.props.incrementAsync} disabled={this.props.isIncrementing}>
+            Increment Async
+          </button>
+        </p>
+
+        <p>
+          <button onClick={this.props.decrement}>Decrement</button>
+          <button onClick={this.props.decrementAsync} disabled={this.props.isDecrementing}>
+            Decrement Async
+          </button>
+        </p>
+
+        <p>
+          <button onClick={() => this.props.changePage()}>
+            Go to about page via redux
+          </button>
+        </p>
+      </div>
+    )
+  }
+}
 
 export default connect(
   mapStateToProps,
