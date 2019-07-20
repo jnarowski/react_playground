@@ -1,21 +1,16 @@
 // README
 // https://redux-starter-kit.js.org/
-
+// https://medium.com/@jeromefranco/reducing-boilerplate-in-redux-with-redux-starter-kit-c5bd9115e75b
+// ASYNC
+// https://github.com/reduxjs/redux-starter-kit/issues/76
 import { createAction, createReducer } from 'redux-starter-kit'
-
-// ---------------------------------------------------
-// Constants
-// ---------------------------------------------------
-
-const INCREASE = 'widgets-starter-kit/INCREASE'
-const DECREASE = 'widgets-starter-kit/DECREASE'
 
 // ---------------------------------------------------
 // ACTIONS
 // ---------------------------------------------------
 
-export const incrementWidget = createAction(INCREASE)
-export const decrementWidget = createAction(DECREASE)
+export const incrementWidget = createAction('widgets-starter-kit/INCREASE')
+export const decrementWidget = createAction('widgets-starter-kit/DECREASE')
 
 // ---------------------------------------------------
 // Reducer
@@ -27,13 +22,13 @@ export const initialState = {
 }
 
 const widgetsStarterKitReducer = createReducer(initialState, {
-  [incrementWidget]: (state, action) => {
+  [incrementWidget.type]: (state, action) => {
     return {
       ...state,
       count: state.count + 1
     }
   },
-  [decrementWidget]: (state, action) => {
+  [decrementWidget.type]: (state, action) => {
     return {
       ...state,
       count: state.count - 1
